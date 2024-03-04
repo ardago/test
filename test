@@ -1,0 +1,37 @@
+Dim conn As ADODB.Connection
+Dim rs As ADODB.Recordset
+
+Sub ConnectToSQLServer()
+    Dim connectionString As String
+    Dim serverName As String
+    Dim databaseName As String
+    Dim username As String
+    Dim password As String
+    
+    ' Rellena estos valores con la información de tu servidor SQL Server
+    serverName = "nombre_del_servidor"
+    databaseName = "nombre_de_la_base_de_datos"
+    username = "tu_usuario"
+    password = "tu_contraseña"
+    
+    ' Construye la cadena de conexión
+    connectionString = "Provider=SQLOLEDB;Data Source=" & serverName & ";Initial Catalog=" & databaseName & ";User ID=" & username & ";Password=" & password & ";"
+    
+    ' Crea una nueva conexión
+    Set conn = New ADODB.Connection
+    
+    ' Abre la conexión
+    conn.Open connectionString
+    
+    ' Si la conexión se establece correctamente, puedes ejecutar consultas
+    If conn.State = adStateOpen Then
+        MsgBox "Conexión establecida correctamente."
+        ' Puedes ejecutar consultas aquí
+        ' Por ejemplo:
+        ' Set rs = New ADODB.Recordset
+        ' rs.Open "SELECT * FROM NombreDeTuTabla", conn
+        ' ...
+    Else
+        MsgBox "Error al establecer la conexión."
+    End If
+End Sub
